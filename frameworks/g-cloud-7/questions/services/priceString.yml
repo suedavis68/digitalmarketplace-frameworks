@@ -33,5 +33,7 @@ validations:
 type: pricing
 question: 'Service price'
 fields:
-  maximum_price: maxPrice
-  minimum_price: minPrice
+  maximum_price: maximum
+  minimum_price: minimum
+  price_unit: unit
+  price_interval: interval
