@@ -161,6 +161,14 @@ def percentage_property(question):
     }}
 
 
+def multiquestion(question):
+    properties = {}
+    for nested_question in question['questions']:
+        properties.update(build_question_properties(nested_question))
+
+    return properties
+
+
 QUESTION_TYPES = {
     'text': text_property,
     'upload': uri_property,
@@ -171,6 +179,7 @@ QUESTION_TYPES = {
     'list': list_property,
     'pricing': pricing_property,
     'percentage': percentage_property,
+    'multiquestion': multiquestion,
 }
 
 
@@ -274,7 +283,7 @@ def build_schema_properties(schema, questions):
             if key == 'priceString':
                 schema['required'].extend(['priceMin', 'priceUnit'])
             else:
-                schema['required'].append(key)
+                schema['required'].extend(question.fields)
 
     schema['required'].sort()
 
